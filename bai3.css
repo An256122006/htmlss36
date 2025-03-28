@@ -1,0 +1,37 @@
+body{
+    text-align: center;
+}
+.color{
+    display: flex;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
+}
+#yellow{
+    background-color: yellow;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px 25px;
+}
+#red{
+    background-color: red;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px 25px;
+}
+#purple{
+    background-color: purple;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px 25px;
+}
+#blue{
+    background-color: blue;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px 25px;
+}
