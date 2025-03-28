@@ -2,26 +2,30 @@ const stars = document.querySelectorAll(".stars");
 const ratingDisplay = document.getElementById("selected-rating");
 const commentInput = document.getElementById("comment-input");
 const commentList = document.getElementById("comment-list");
-let selectedRating = 0; 
-let reviews = JSON.parse(localStorage.getItem("productReviews")) || [];
-displayReviews();
+
+let selectedRating = 0;
+let arr = JSON.parse(localStorage.getItem("productReviews")) || [];
+
+addReviews();
+
 stars.forEach(star => {
-    star.onclick=function(){
-        selectedRating = this.getAttribute("data-value");
+    star.onclick = function () {
+        selectedRating = parseInt(this.getAttribute("data-value"));
         updateStars(selectedRating);
         ratingDisplay.innerText = `Bạn đã đánh giá: ${selectedRating} sao`;
     };
 });
+
 function updateStars(rating) {
     stars.forEach(star => {
-        let starValue = star.getAttribute("data-value");
+        let starValue = parseInt(star.getAttribute("data-value"));
         if (starValue <= rating) {
-            star.style.color = "gold"; 
+            star.style.color = "gold";
         } else {
-            star.style.color = "gray"; 
+            star.style.color = "gray";
         }
     });
-};
+}
 function submitReview() {
     let commentText = commentInput.value.trim();
 
@@ -35,27 +39,25 @@ function submitReview() {
         return;
     }
 
-    let review = {
+    let newReview = {
         rating: selectedRating,
         comment: commentText
     };
 
-    reviews.push(review);
-    localStorage.setItem("productReviews", JSON.stringify(reviews));
+    arr.push(newReview);
+    localStorage.setItem("productReviews", JSON.stringify(arr));
 
-    displayReviews();
-    commentInput.value = ""; 
+    addReviews();
+    commentInput.value = "";
 }
-
-
-function displayReviews() {
-    commentList.innerHTML = ""; 
-    reviews.forEach(review => {
-        commentList.innerHTML+=`
-               <diV class="commentss">
-                 <div style="color: gold;">${"★".repeat(review.rating)}</div>
-                 <div>${review.comment}</div>
-               </diV>
-        `
+function addReviews() {
+    commentList.innerHTML = "";
+    arr.forEach(element => {
+        commentList.innerHTML += `
+            <div class="commentss">
+                <div style="color: gold;">${"★".repeat(element.rating)}</div>
+                <div>${element.comment}</div>
+            </div>
+        `;
     });
-};
+}
